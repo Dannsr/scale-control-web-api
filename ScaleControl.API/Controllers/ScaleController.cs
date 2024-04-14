@@ -41,5 +41,17 @@ public class ScaleController : ControllerBase
         // Remove escala
         return NoContent();
     }
+
+    public IActionResult Start(int id)
+    {
+        // inicia uma escala
+        return NoContent();
+    }
+
+    public IActionResult Finish(int id)
+    {
+        // finaliza uma escala
+        return NoContent();
+    }
     
 }
