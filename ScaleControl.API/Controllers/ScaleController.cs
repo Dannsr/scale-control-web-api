@@ -41,13 +41,13 @@ public class ScaleController : ControllerBase
         // Remove escala
         return NoContent();
     }
-
+    [HttpGet("{id}/start")]
     public IActionResult Start(int id)
     {
         // inicia uma escala
         return NoContent();
     }
-
+    [HttpGet("{id}/finish")]
     public IActionResult Finish(int id)
     {
         // finaliza uma escala

@@ -4,6 +4,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScaleControl.API", "ScaleCo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScaleControl.Core", "ScaleControl.Core\ScaleControl.Core.csproj", "{94832C02-BDE5-4248-8DBC-6CE437E11A4A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScaleControl.Infraestructure", "ScaleControl.Infraestructure\ScaleControl.Infraestructure.csproj", "{7D086F94-AF98-4E29-8076-F27A33E48FED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScaleControl.Application", "ScaleControl.Application\ScaleControl.Application.csproj", "{112F8FA8-A23A-419A-8849-FF3EA472C274}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +22,13 @@ Global
 		{94832C02-BDE5-4248-8DBC-6CE437E11A4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{94832C02-BDE5-4248-8DBC-6CE437E11A4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{94832C02-BDE5-4248-8DBC-6CE437E11A4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D086F94-AF98-4E29-8076-F27A33E48FED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D086F94-AF98-4E29-8076-F27A33E48FED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D086F94-AF98-4E29-8076-F27A33E48FED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D086F94-AF98-4E29-8076-F27A33E48FED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{112F8FA8-A23A-419A-8849-FF3EA472C274}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{112F8FA8-A23A-419A-8849-FF3EA472C274}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{112F8FA8-A23A-419A-8849-FF3EA472C274}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{112F8FA8-A23A-419A-8849-FF3EA472C274}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
