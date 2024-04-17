@@ -25,6 +25,10 @@ public class ScaleService : IScaleService
     public ScaleDetailsViewModel GetById(int id)
     {
         var scale = _dbContext.Scales.FirstOrDefault(s => s.Id == id);
+        if (scale == null)
+        {
+            return null;
+        }
         var scaleDetailsViewModel = new ScaleDetailsViewModel(scale.Id, scale.Description, scale.TypeService,
             scale.StartAt, scale.FinishAt, scale.Status, scale.IdOffices);
         return scaleDetailsViewModel;
@@ -39,7 +43,7 @@ public class ScaleService : IScaleService
 
     public void Update(ScaleInputModel inputModel)
     {
-        throw new NotImplementedException();
+        var scale = _dbContext.Scales.SingleOrDefault(p => p.Id == inputModel.Id);
     }
 
     public void Delete(int id)

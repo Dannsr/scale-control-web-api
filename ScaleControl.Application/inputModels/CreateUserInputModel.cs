@@ -1,9 +1,11 @@
+using ScaleControl.Core.Entities;
+
 namespace ScaleControl.Application.inputModels;
 
-public class CreateUserInputModel
+public class CreateUserInputModel 
 {
-    public int Id { get; set; }
     public string FullName { get; set; }
-    public int enrollment { get; set; }
-    public int Sei { get; set; }
+    public int Enrollment { get; set; }
+    public string Email { get; set; }
+    public DateTime BirthDate { get; set; }
 }
