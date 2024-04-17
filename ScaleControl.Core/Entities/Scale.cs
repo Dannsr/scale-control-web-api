@@ -5,20 +5,20 @@ namespace ScaleControl.Core.Entities;
 
 public class Scale : BaseEntity
 {
-    public Scale(string description, IEnumerable<User> offices)
+    public Scale(string description, List<User> offices)
     {
         Description = description;
-        IdOffices = offices.Select(x => x.Id);
+        Offices = new List<UserScale>();      
         Status = ScaleStatusEnum.StandBy;
         TypeService = ScaleTypeServiceEnum.Administrative;
         Turn = ScaleTurnEnum.BusinessHours;
     }
 
-    public Scale(string description, IEnumerable<User> offices, ScaleStatusEnum status,
+    public Scale(string description, ScaleStatusEnum status,
         ScaleTypeServiceEnum typeService, ScaleTurnEnum turn)
     {
         Description = description;
-        IdOffices = offices.Select(x => x.Id);
+        Offices = new List<UserScale>();
         Status = status;
         TypeService = typeService;
         Turn = turn;
@@ -27,7 +27,7 @@ public class Scale : BaseEntity
     public string Description { get; private set; }
     public DateTime StartAt { get; private set; }
     public DateTime FinishAt { get; private set; }
-    public IEnumerable<int> IdOffices { get; private set; }
+    public List<UserScale> Offices { get; private set; }
     public ScaleStatusEnum Status { get; private set; }
     public ScaleTypeServiceEnum TypeService { get; private set;}
     public ScaleTurnEnum Turn { get; private set; }

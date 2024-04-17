@@ -12,7 +12,7 @@ public class User : BaseEntity
         BirthDate = birthDate;
         CreatedAt = DateTime.Now;
         Active = true;
-        Scales = new List<UserScale?>();
+        Scales = new List<UserScale>();
     }
 
     public string FullName { get; private set; }
@@ -20,6 +20,6 @@ public class User : BaseEntity
     public bool Active { get; private set; }
     public DateTime BirthDate { get; private set; }
     public DateTime CreatedAt { get; private set; }
-    public List<UserScale?> Scales { get; private set; }
+    public List<UserScale> Scales { get; private set; }
     public int Enrollment { get; set; }
 }
