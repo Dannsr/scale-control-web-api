@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using ScaleControl.API.Models;
+using ScaleControl.API;
 using ScaleControl.Application.inputModels;
 using ScaleControl.Application.Services.Interfaces;
 

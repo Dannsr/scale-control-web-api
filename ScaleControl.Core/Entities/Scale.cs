@@ -28,6 +28,8 @@ public class Scale : BaseEntity
     public DateTime StartAt { get; private set; }
     public DateTime FinishAt { get; private set; }
     public List<UserScale> Offices { get; private set; }
+    
+    public List<User> OfficesNames { get; set; }
     public ScaleStatusEnum Status { get; private set; }
     public ScaleTypeServiceEnum TypeService { get; private set;}
     public ScaleTurnEnum Turn { get; private set; }

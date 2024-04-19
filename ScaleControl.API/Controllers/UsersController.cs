@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using ScaleControl.API.Models;
+using ScaleControl.API;
+using ScaleControl.Application.inputModels;
 
 namespace ScaleControl.API.Controllers;
 [Route("api/users")]
@@ -16,13 +17,13 @@ public class UsersController : ControllerBase
         return Ok();
     }    
     [HttpPost]
-    public IActionResult Post([FromBody] CreateUserModel createUserModel)
+    public IActionResult Post([FromBody] CreateUserInputModel createUserModel)
     {
         return CreatedAtAction(nameof(GetById), new { id = 1}, createUserModel);
     }
 
     [HttpPut("{id}/login")]
-    public IActionResult Login(int id, [FromBody] LoginModel loginModel)
+    public IActionResult Login(int id, [FromBody] CreateUserInputModel createUserModel)
     {
         return NoContent();
     }

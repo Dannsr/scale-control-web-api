@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using ScaleControl.Application.Services.Implementations;
 using ScaleControl.Application.Services.Interfaces;
@@ -9,7 +10,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddSingleton<ScaleControlDbContext>(); // Registre o ScaleControlDbContext como Singleton
+var connectionString = builder.Configuration.GetConnectionString("ScaleControlCs");
+builder.Services.AddDbContext<ScaleControlDbContext>(options => options.UseInMemoryDatabase("ScaleControl"));
 builder.Services.AddScoped<IScaleService, ScaleService>();
 
 var app = builder.Build();
