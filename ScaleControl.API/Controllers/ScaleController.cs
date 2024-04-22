@@ -1,29 +1,38 @@
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ScaleControl.API;
-using ScaleControl.Application.inputModels;
-using ScaleControl.Application.Services.Interfaces;
+using ScaleControl.Application.Commands.CreateScale;
+using ScaleControl.Application.Commands.DeleteScale;
+using ScaleControl.Application.Commands.Scale.FinishScale;
+using ScaleControl.Application.Commands.StartScale;
+using ScaleControl.Application.Commands.UpdateScale;
+using ScaleControl.Application.Queries.Scale;
+using ScaleControl.Application.Queries.Scale.GetByIdScales;
 
 namespace ScaleControl.API.Controllers;
 [Route("api/scales")]
 public class ScaleController : ControllerBase
 {
-    private readonly IScaleService _scaleService;
-
-    public ScaleController(IScaleService scaleService)
+    private readonly IMediator _mediator;
+    public ScaleController(IMediator mediator)
     {
-        _scaleService = scaleService;
+        _mediator = mediator;
     }
     [HttpGet]
-    public IActionResult Get(string query)
+    public async Task<IActionResult> Get(string query)
     {
-        var scales = _scaleService.GetAll(query);
+        var command = new GetAllScalesQuery(query);
+        var scales = await _mediator.Send(command);
         return Ok(scales);
     }
 
     [HttpGet("{id}")]
-    public IActionResult GetById(int id)
+    public async Task<IActionResult> GetById(int id)
     {
-        var scale = _scaleService.GetById(id);
+        var command = new GetByIdScaleQuery(id);
+        var scale = await _mediator.Send(command);
+        
         if (scale == null)
         {
             return NotFound();
@@ -31,43 +40,42 @@ public class ScaleController : ControllerBase
         return Ok(scale);
     }
     [HttpPost]
-    public IActionResult Post([FromBody] ScaleInputModel scaleModel)
+    public async Task<IActionResult> Post([FromBody] CreateScaleCommand command)
     {
         // Cadastrar escala
-        if (scaleModel.StartAt > DateTime.Now)
+        if (command.StartAt > DateTime.Now)
         {
             return BadRequest();
         }
 
-        var id = _scaleService.Create((scaleModel));
-        return CreatedAtAction(nameof(GetById), new { id = scaleModel.Id}, scaleModel);
+        var id = await _mediator.Send(command);
+        return CreatedAtAction(nameof(GetById), new { id = id }, command);
     }
     [HttpPut("{id}")]
-    public IActionResult Put(int id, [FromBody] ScaleInputModel scaleModel)
+    public async Task<IActionResult> Put(int id, [FromBody] UpdateScaleCommand command)
     {
-        _scaleService.Update(scaleModel);
-
+        await _mediator.Send(command);
         return NoContent();
     }
     [HttpDelete("{id}")]
-    public IActionResult Delete(int id)
-    {   
-        _scaleService.Delete(id);
-        // Remove escala
+    public async Task<IActionResult> Delete(int id)
+    {
+        var command = new DeleteScaleCommand(id);
+        await _mediator.Send(command);
         return NoContent();
     }
     [HttpGet("{id}/start")]
-    public IActionResult Start(int id)
+    public async Task<IActionResult> Start(int id)
     {
-        _scaleService.Start(id);
-        // inicia uma escala
+        var command = new StartScaleCommand(id);
+        await _mediator.Send(command);
         return NoContent();
     }
     [HttpGet("{id}/finish")]
-    public IActionResult Finish(int id)
+    public async Task<IActionResult> Finish(int id)
     {
-        _scaleService.Finish(id);
-        // finaliza uma escala
+        var command = new FinishScaleCommand(id);
+        await _mediator.Send(command);
         return NoContent();
     }
     

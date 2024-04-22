@@ -1,7 +1,17 @@
-using System.Runtime.InteropServices.JavaScript;
+using MediatR;
 using ScaleControl.Core.Enums;
 
-namespace ScaleControl.Application.ViewModels;
+namespace ScaleControl.Application.Queries.Scale;
+
+public class GetAllScalesQuery : IRequest<List<ScaleViewModel>>
+{
+    public GetAllScalesQuery(string query)
+    {
+        Query = query;
+    }
+
+    public string Query { get; private set; }
+}
 
 public class ScaleViewModel
 {

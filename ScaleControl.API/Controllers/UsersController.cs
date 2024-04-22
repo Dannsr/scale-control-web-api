@@ -1,29 +1,42 @@
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using ScaleControl.API;
-using ScaleControl.Application.inputModels;
+using ScaleControl.Application.Commands.User;
+using ScaleControl.Application.Queries.Scale.GetByIdScales;
+using ScaleControl.Application.Queries.User.GetAllUsers;
 
 namespace ScaleControl.API.Controllers;
 [Route("api/users")]
 public class UsersController : ControllerBase
 {
-    [HttpGet]
-    public IActionResult Get(string query)
+    private readonly IMediator _mediator;
+    public UsersController(IMediator mediator)
     {
-        return Ok();
+        _mediator = mediator;
+    }
+    [HttpGet]
+    public async Task<IActionResult> Get(string query)
+    {
+        var command = new GetAllUsersQuery(query);
+        var users = _mediator.Send(command);
+        return Ok(users);
     }
     [HttpGet("{id}")]
-    public IActionResult GetById(int id)
+    public async Task<IActionResult> GetById(int id)
     {
-        return Ok();
+        var command = new GetByIdScaleQuery(id);
+        var user = await _mediator.Send(command);
+        return Ok(user);
     }    
     [HttpPost]
-    public IActionResult Post([FromBody] CreateUserInputModel createUserModel)
+    public async Task<IActionResult> Post([FromBody] CreateUserCommand command)
     {
-        return CreatedAtAction(nameof(GetById), new { id = 1}, createUserModel);
+        var id = await _mediator.Send(command);
+        return CreatedAtAction(nameof(GetById), new { id = id }, command);
     }
 
     [HttpPut("{id}/login")]
-    public IActionResult Login(int id, [FromBody] CreateUserInputModel createUserModel)
+    public IActionResult Login(int id, [FromBody] CreateUserCommand command)
     {
         return NoContent();
     }

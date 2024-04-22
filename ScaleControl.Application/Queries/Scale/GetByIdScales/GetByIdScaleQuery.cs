@@ -1,15 +1,23 @@
-using System.Runtime.InteropServices.JavaScript;
-using ScaleControl.Core.Entities;
+using MediatR;
 using ScaleControl.Core.Enums;
 
-namespace ScaleControl.Application.ViewModels;
+namespace ScaleControl.Application.Queries.Scale.GetByIdScales;
+
+public class GetByIdScaleQuery : IRequest<ScaleDetailsViewModel>
+{
+    public GetByIdScaleQuery(int id)
+    {
+        Id = id;
+    }
+
+    public int Id { get; private set; }
+}
 
 public class ScaleDetailsViewModel
 {
-    public ScaleDetailsViewModel(int id, string description, ScaleTypeServiceEnum typeServiceEnum, DateTime startAt, DateTime finishAt, ScaleStatusEnum status, List<string> officesFullNames)
+    public ScaleDetailsViewModel(int id,ScaleTypeServiceEnum typeServiceEnum, DateTime startAt, DateTime finishAt, ScaleStatusEnum status, List<string> officesFullNames)
     {
         Id = id;
-        Description = description;
         TypeServiceEnum = typeServiceEnum;
         StartAt = startAt;
         FinishAt = finishAt;
@@ -18,7 +26,6 @@ public class ScaleDetailsViewModel
     }
 
     public int Id { get; private set; }
-    public string Description { get; private set; }
     public ScaleTypeServiceEnum TypeServiceEnum { get; private set; }
     public DateTime StartAt { get; private set; }
     public DateTime FinishAt { get; private set; }

@@ -1,6 +1,17 @@
+using MediatR;
 using ScaleControl.Core.Entities;
 
-namespace ScaleControl.Application.ViewModels;
+namespace ScaleControl.Application.Queries.User.GetByIdUsers;
+
+public class GetByIdUsersQuery : IRequest<UserDetailsViewModel>
+{
+    public GetByIdUsersQuery(int enrollment)
+    {
+        Enrollment = enrollment;
+    }
+
+    public int Enrollment { get; private set; }
+}
 
 public class UserDetailsViewModel
 {

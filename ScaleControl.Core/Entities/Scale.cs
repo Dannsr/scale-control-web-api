@@ -1,30 +1,25 @@
-using System.Runtime.InteropServices.JavaScript;
 using ScaleControl.Core.Enums;
 
 namespace ScaleControl.Core.Entities;
 
 public class Scale : BaseEntity
 {
-    public Scale(string description, List<User> offices)
+    public Scale()
     {
-        Description = description;
         Offices = new List<UserScale>();      
         Status = ScaleStatusEnum.StandBy;
         TypeService = ScaleTypeServiceEnum.Administrative;
         Turn = ScaleTurnEnum.BusinessHours;
     }
 
-    public Scale(string description, ScaleStatusEnum status,
+    public Scale(List<UserScale> offices, ScaleStatusEnum status,
         ScaleTypeServiceEnum typeService, ScaleTurnEnum turn)
     {
-        Description = description;
-        Offices = new List<UserScale>();
+        Offices = offices;
         Status = status;
         TypeService = typeService;
         Turn = turn;
     }
-
-    public string Description { get; private set; }
     public DateTime StartAt { get; private set; }
     public DateTime FinishAt { get; private set; }
     public List<UserScale> Offices { get; private set; }
@@ -52,6 +47,16 @@ public class Scale : BaseEntity
             Status = ScaleStatusEnum.Finished;
             FinishedAt = DateTime.Now;
         }
+    }
+
+    public void Update(List<User> offices, ScaleStatusEnum status, ScaleTypeServiceEnum typeServiceEnum, ScaleTurnEnum turn, DateTime startAt, DateTime finishAt)
+    {
+        OfficesNames = offices;
+        Status = status;
+        TypeService = typeServiceEnum;
+        Turn = turn;
+        StartAt = startAt;
+        FinishAt = finishAt;
     }
 
     public void Start()

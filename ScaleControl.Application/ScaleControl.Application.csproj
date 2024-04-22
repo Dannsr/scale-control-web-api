@@ -10,4 +10,8 @@
       <ProjectReference Include="..\ScaleControl.Infraestructure\ScaleControl.Infraestructure.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.1.0" />
+    </ItemGroup>
+
 </Project>

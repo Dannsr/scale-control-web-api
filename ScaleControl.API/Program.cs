@@ -1,18 +1,18 @@
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using ScaleControl.Application.Services.Implementations;
-using ScaleControl.Application.Services.Interfaces;
+using ScaleControl.Application.Commands.CreateScale;
 using ScaleControl.Infraestructure.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Adicionar serviços ao contêiner.
 builder.Services.AddControllers();
+builder.Services.AddMediatR(typeof(CreateScaleCommand));
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 var connectionString = builder.Configuration.GetConnectionString("ScaleControlCs");
 builder.Services.AddDbContext<ScaleControlDbContext>(options => options.UseInMemoryDatabase("ScaleControl"));
-builder.Services.AddScoped<IScaleService, ScaleService>();
 
 var app = builder.Build();
 

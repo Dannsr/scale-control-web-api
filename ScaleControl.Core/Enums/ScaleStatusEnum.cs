@@ -7,5 +7,4 @@ public enum ScaleStatusEnum
     Cancelled = 2,
     Finished = 3,
     StandBy = 4
-        
 }
