@@ -18,7 +18,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\ScaleControl.Application\ScaleControl.Application.csproj" />
-      <ProjectReference Include="..\ScaleControl.Infraestructure\ScaleControl.Infraestructure.csproj" />
     </ItemGroup>
 
 </Project>

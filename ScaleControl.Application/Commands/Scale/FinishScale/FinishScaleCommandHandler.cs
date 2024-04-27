@@ -1,22 +1,22 @@
 using MediatR;
+using ScaleControl.Core.Repositories;
 using ScaleControl.Infraestructure.Persistence;
 
 namespace ScaleControl.Application.Commands.Scale.FinishScale;
 
 public class FinishScaleCommandHandler : IRequestHandler<FinishScaleCommand, Unit>
 {
-    private readonly ScaleControlDbContext _dbContext;
-
-    public FinishScaleCommandHandler(ScaleControlDbContext dbContext)
+    private readonly IScaleRepository _scaleRepository;
+    
+    public FinishScaleCommandHandler(IScaleRepository scaleRepository)
     {
-        _dbContext = dbContext;
+        _scaleRepository = scaleRepository;
     }
-
     public async Task<Unit> Handle(FinishScaleCommand request, CancellationToken cancellationToken)
     {
-        var scale = _dbContext.Scales.SingleOrDefault(s => s.Id == request.Id);
+        var scale = await _scaleRepository.GetScale(request.Id);
         scale.Finish();
-        await _dbContext.SaveChangesAsync();
+        await _scaleRepository.SaveChangesAsync();
         return Unit.Value;
     }
 }

@@ -1,23 +1,25 @@
 using MediatR;
+using ScaleControl.Core.Repositories;
 using ScaleControl.Infraestructure.Persistence;
 
 namespace ScaleControl.Application.Commands.DeleteScale;
 
 public class DeleteScaleCommandHandler : IRequestHandler<DeleteScaleCommand, Unit>
 {
-    private readonly ScaleControlDbContext _dbContext;
-
-    public DeleteScaleCommandHandler(ScaleControlDbContext dbContext)
+    private readonly IScaleRepository _scaleRepository;
+    
+    public DeleteScaleCommandHandler(IScaleRepository scaleRepository)
     {
-        _dbContext = dbContext;
+        _scaleRepository = scaleRepository;
     }
+
     
     public async Task<Unit> Handle(DeleteScaleCommand request, CancellationToken cancellationToken)
     {
-        var scale = _dbContext.Scales.SingleOrDefault(s => s.Id == request.Id);
+        var scale = await _scaleRepository.GetScale(request.Id);
         scale.Cancel();
-        _dbContext.Scales.Remove(scale);
-        await _dbContext.SaveChangesAsync();
+        await _scaleRepository.DeleteScale(scale);
+        await _scaleRepository.SaveChangesAsync();
         return Unit.Value;
     }
 }

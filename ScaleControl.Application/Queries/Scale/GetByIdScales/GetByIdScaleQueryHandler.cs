@@ -1,22 +1,23 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using ScaleControl.Core.Repositories;
 using ScaleControl.Infraestructure.Persistence;
 
 namespace ScaleControl.Application.Queries.Scale.GetByIdScales;
 
 public class GetByIdScaleQueryHandler : IRequestHandler<GetByIdScaleQuery, ScaleDetailsViewModel>
 {
-    private readonly ScaleControlDbContext _dbContext;
+    private readonly IScaleRepository _scaleRepository;
 
-    public GetByIdScaleQueryHandler(ScaleControlDbContext dbContext)
+    public GetByIdScaleQueryHandler(IScaleRepository scaleRepository)
     {
-        _dbContext = dbContext;
+        _scaleRepository = scaleRepository;
     }
 
 
     public async Task<ScaleDetailsViewModel> Handle(GetByIdScaleQuery request, CancellationToken cancellationToken)
     {
-        var scale = _dbContext.Scales.Include(u => u.Offices).SingleOrDefault(s => s.Id == request.Id);
+        var scale = await _scaleRepository.GetScale(request.Id);
         
         if (scale == null)
         {

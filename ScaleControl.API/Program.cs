@@ -1,12 +1,16 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
 using Microsoft.Extensions.DependencyInjection;
 using ScaleControl.Application.Commands.CreateScale;
+using ScaleControl.Core.Repositories;
 using ScaleControl.Infraestructure.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Adicionar serviços ao contêiner.
+builder.Services.AddScoped<IScaleRepository, ScaleRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddControllers();
 builder.Services.AddMediatR(typeof(CreateScaleCommand));
 builder.Services.AddEndpointsApiExplorer();
