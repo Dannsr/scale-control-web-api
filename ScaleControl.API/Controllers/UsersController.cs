@@ -18,7 +18,7 @@ public class UsersController : ControllerBase
     public async Task<IActionResult> Get(string query)
     {
         var command = new GetAllUsersQuery(query);
-        var users = _mediator.Send(command);
+        var users = await _mediator.Send(command);
         return Ok(users);
     }
     [HttpGet("{id}")]
@@ -36,7 +36,7 @@ public class UsersController : ControllerBase
     }
 
     [HttpPut("{id}/login")]
-    public IActionResult Login(int id, [FromBody] CreateUserCommand command)
+    public async Task<IActionResult> Login(int id, [FromBody] CreateUserCommand command)
     {
         return NoContent();
     }

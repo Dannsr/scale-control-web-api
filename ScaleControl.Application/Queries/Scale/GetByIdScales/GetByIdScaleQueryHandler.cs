@@ -18,14 +18,9 @@ public class GetByIdScaleQueryHandler : IRequestHandler<GetByIdScaleQuery, Scale
     public async Task<ScaleDetailsViewModel> Handle(GetByIdScaleQuery request, CancellationToken cancellationToken)
     {
         var scale = await _scaleRepository.GetScale(request.Id);
-        
-        if (scale == null)
-        {
-            return null;
-        }
-        List<string> officeNames = scale.OfficesNames.Select(u => u.FullName).ToList();
+        var users = scale.Users.Select(u => u.FullName).ToList();
         var scaleDetailsViewModel = new ScaleDetailsViewModel(scale.Id,scale.TypeService,
-            scale.StartAt, scale.FinishAt, scale.Status, officeNames);
+            scale.StartAt, scale.FinishAt, scale.Status, users);
         return scaleDetailsViewModel;
     }
 }

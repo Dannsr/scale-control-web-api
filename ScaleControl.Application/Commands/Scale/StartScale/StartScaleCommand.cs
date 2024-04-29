@@ -8,5 +8,5 @@ public class StartScaleCommand : IRequest<Unit>
     {
         Id = id;
     }
-    public int Id { get; private set; }
+    public int Id { get; set; }
 }

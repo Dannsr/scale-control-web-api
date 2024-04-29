@@ -1,9 +1,8 @@
 using MediatR;
-using ScaleControl.Core.Entities;
+using ScaleControl.Application.Commands.CreateScale;
 using ScaleControl.Core.Repositories;
-using ScaleControl.Infraestructure.Persistence;
 
-namespace ScaleControl.Application.Commands.CreateScale;
+namespace ScaleControl.Application.Commands.Scale.CreateScale;
 
 public class CreateScaleCommandHandler : IRequestHandler<CreateScaleCommand, int>
 {
@@ -15,8 +14,8 @@ public class CreateScaleCommandHandler : IRequestHandler<CreateScaleCommand, int
     }
     
     public async Task<int> Handle(CreateScaleCommand request, CancellationToken cancellationToken)
-    { 
-        var scale = new Core.Entities.Scale(request.IdOffices, request.Status, request.TypeService, request.Turn);
+    {
+        var scale = new Core.Entities.Scale(request.Enrollments, request.Status, request.TypeService, request.Turn, request.StartAt, request.FinishAt, request.Observation);
         await _scaleRepository.AddAsync(scale);
         await _scaleRepository.SaveChangesAsync();
         return scale.Id;

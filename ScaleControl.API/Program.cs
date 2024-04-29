@@ -10,6 +10,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Adicionar serviços ao contêiner.
 builder.Services.AddScoped<IScaleRepository, ScaleRepository>();
+builder.Services.AddScoped<IRestrictionRepository, RestrictionRepository>();
+builder.Services.AddScoped<IDetachmentRepository, DetachmentRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddControllers();
 builder.Services.AddMediatR(typeof(CreateScaleCommand));

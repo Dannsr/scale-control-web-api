@@ -1,10 +1,7 @@
+using ScaleControl.Core.Base;
+
 namespace ScaleControl.Core.Enums;
 
-public enum ScaleTypeServiceEnum
+public class ScaleTypeServiceEnum : BaseEnumEntity
 {
-    Administrative = 0,
-    Operational = 1,
-    Representation = 2,
-    Course = 3,
-    Warned = 4
 }

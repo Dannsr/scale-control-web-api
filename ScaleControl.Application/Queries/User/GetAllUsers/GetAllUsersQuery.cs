@@ -1,5 +1,4 @@
 using MediatR;
-using ScaleControl.Core.Entities;
 
 namespace ScaleControl.Application.Queries.User.GetAllUsers;
 
@@ -7,17 +6,17 @@ public class GetAllUsersQuery : IRequest<UserViewModel>, IRequest<List<UserViewM
 {
     public GetAllUsersQuery(string query)
     {
-        this.query = query;
+        Query = query;
     }
 
-    public string query { get; private set; }
+    public string Query { get; private set; }
     
     
 }
 
 public class UserViewModel
 {
-    public UserViewModel(int enrollment, string fullName, List<UserScale> lastScale)
+    public UserViewModel(int enrollment, string fullName, List<Core.Entities.Scale?> lastScale)
     {
         Enrollment = enrollment;
         FullName = fullName;
@@ -25,6 +24,6 @@ public class UserViewModel
     }
     public int Enrollment { get; private set; }
     public string FullName { get; private set; }
-    public List<UserScale> LastScale { get; private set; }
+    public List<Core.Entities.Scale?> LastScale { get; private set; }
     
 }

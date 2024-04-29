@@ -7,7 +7,8 @@ namespace ScaleControl.Application.Commands.CreateScale;
 
 public class CreateScaleCommand : IRequest<int>
 {
-    public List<UserScale> IdOffices { get; set; }
+    public string Observation { get; set; }
+    public List<int> Enrollments { get; set; }
     public ScaleStatusEnum Status { get; set; }
     public ScaleTypeServiceEnum TypeService { get; set;}
     public ScaleTurnEnum Turn { get; set; }

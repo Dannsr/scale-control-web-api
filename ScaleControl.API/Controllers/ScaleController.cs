@@ -32,22 +32,11 @@ public class ScaleController : ControllerBase
     {
         var command = new GetByIdScaleQuery(id);
         var scale = await _mediator.Send(command);
-        
-        if (scale == null)
-        {
-            return NotFound();
-        }
         return Ok(scale);
     }
     [HttpPost]
     public async Task<IActionResult> Post([FromBody] CreateScaleCommand command)
     {
-        // Cadastrar escala
-        if (command.StartAt > DateTime.Now)
-        {
-            return BadRequest();
-        }
-
         var id = await _mediator.Send(command);
         return CreatedAtAction(nameof(GetById), new { id = id }, command);
     }

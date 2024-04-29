@@ -18,8 +18,9 @@ public class GetAllUsersQueryHandler : IRequestHandler<GetAllUsersQuery, List<Us
     public async Task<List<UserViewModel>> Handle(GetAllUsersQuery request, CancellationToken cancellationToken)
     {
         var users = await _userRepository.GetAll();
+        var scales = users.Select(u => u.Scales).ToList();
         var usersViewModel = users
-            .Select(u => new UserViewModel(u.Enrollment, u.FullName, u.Scales))
+            .Select(u => new UserViewModel(u.Enrollment, u.FullName, scales))
             .ToList();
         return usersViewModel;
     }

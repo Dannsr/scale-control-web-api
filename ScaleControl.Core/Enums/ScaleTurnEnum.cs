@@ -1,9 +1,7 @@
+using ScaleControl.Core.Base;
+
 namespace ScaleControl.Core.Enums;
 
-public enum ScaleTurnEnum
+public class ScaleTurnEnum : BaseEnumEntity
 {
-    Morning = 0,
-    Everning = 1,
-    FullTime = 2,
-    BusinessHours = 3
 }

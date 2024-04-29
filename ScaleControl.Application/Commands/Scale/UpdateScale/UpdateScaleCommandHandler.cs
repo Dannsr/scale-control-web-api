@@ -17,7 +17,7 @@ public class UpdateScaleCommandHandler : IRequestHandler<UpdateScaleCommand, Uni
     public async Task<Unit> Handle(UpdateScaleCommand request, CancellationToken cancellationToken)
     {
         var scale = await _scaleRepository.GetScale(request.Id);
-        scale.Update(request.IdOffices, request.Status, request.TypeService, request.Turn, request.FinishAt,
+        scale.Update(request.Enrollments, request.Status, request.TypeService, request.Turn, request.StartAt,
             request.FinishAt);
         await _scaleRepository.SaveChangesAsync();
         return Unit.Value;

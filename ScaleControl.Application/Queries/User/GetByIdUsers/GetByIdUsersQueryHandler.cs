@@ -16,9 +16,10 @@ public class GetByIdUsersQueryHandler : IRequestHandler<GetByIdUsersQuery, UserD
     public async Task<UserDetailsViewModel> Handle(GetByIdUsersQuery request, CancellationToken cancellationToken)
     {
         var user = await _userRepository.GetUser(request.Enrollment);
+        var scales = user.Scales;
         var userDetails = new UserDetailsViewModel(user.Enrollment, user.FullName, user.Email, user.BirthDate,
             user.CreatedAt,
-            user.Active, user.Scales);
+            user.Active, scales);
         return userDetails;
     }
 }

@@ -20,7 +20,7 @@ public class ScaleRepository : IScaleRepository
 
     public async Task<Scale> GetScale(int id)
     {
-        return await _dbContext.Scales.Include(u => u.Offices).SingleOrDefaultAsync(s => s.Id == id);
+        return await _dbContext.Scales.Include(u => u.Users).SingleOrDefaultAsync(s => s.Id == id);
     }
 
     public async Task AddAsync(Scale scale)
@@ -32,7 +32,6 @@ public class ScaleRepository : IScaleRepository
     {
         _dbContext.Scales.Remove(scale);
     }
-    
 
     public async Task SaveChangesAsync()
     {

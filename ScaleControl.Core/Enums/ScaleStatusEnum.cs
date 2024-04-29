@@ -1,10 +1,7 @@
+using ScaleControl.Core.Base;
+
 namespace ScaleControl.Core.Enums;
 
-public enum ScaleStatusEnum
+public class ScaleStatusEnum : BaseEnumEntity
 {
-    Started = 0,
-    InProgress = 1,
-    Cancelled = 2,
-    Finished = 3,
-    StandBy = 4
 }

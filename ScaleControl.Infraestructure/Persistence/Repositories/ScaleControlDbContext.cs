@@ -11,7 +11,8 @@ public class ScaleControlDbContext : DbContext
     {
     }
     public DbSet<Scale> Scales { get; set; }
-    public DbSet<UserScale> UserScales { get; set; }
+    public DbSet<Detachment> Detachments { get; set; }
+    public DbSet<Restriction> Restrictions { get; set; }
     public DbSet<User> Users { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

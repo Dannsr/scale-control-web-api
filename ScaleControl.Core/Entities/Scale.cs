@@ -1,70 +1,82 @@
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Runtime.InteropServices.JavaScript;
+using ScaleControl.Core.Base;
 using ScaleControl.Core.Enums;
 
 namespace ScaleControl.Core.Entities;
 
 public class Scale : BaseEntity
 {
-    public Scale()
-    {
-        Offices = new List<UserScale>();      
-        Status = ScaleStatusEnum.StandBy;
-        TypeService = ScaleTypeServiceEnum.Administrative;
-        Turn = ScaleTurnEnum.BusinessHours;
-    }
 
-    public Scale(List<UserScale> offices, ScaleStatusEnum status,
-        ScaleTypeServiceEnum typeService, ScaleTurnEnum turn)
+
+    //public Scale(List<int> enrollments, DateTime startAt, DateTime finishAt, string observation)
+    //{
+    //    Users.Find(u => u.Enrollment == enrollments.FirstOrDefault());
+    //    Status = ScaleStatusEnum.StandBy;
+    //    StartAt = startAt;
+    //    FinishAt = finishAt;
+    //    Observation = observation;
+    //    TypeService = ScaleTypeServiceEnum.Administrative;
+    //    Turn = ScaleTurnEnum.BusinessHours;
+    //}
+
+    public Scale(List<int> enrollments,ScaleStatusEnum status,
+        ScaleTypeServiceEnum typeService, ScaleTurnEnum turn, DateTime startAt, DateTime finishAt, string observation)
     {
-        Offices = offices;
+        Users.Find(u => u.Enrollment == enrollments.FirstOrDefault());
         Status = status;
         TypeService = typeService;
         Turn = turn;
+        StartAt = startAt;
+        FinishAt = finishAt;
+        Observation = observation;
     }
+    
+    public string Observation { get; private set; }
     public DateTime StartAt { get; private set; }
     public DateTime FinishAt { get; private set; }
-    public List<UserScale> Offices { get; private set; }
     
-    public List<User> OfficesNames { get; set; }
+    [ForeignKey("Id")]
+    public List<User> Users { get; set; }
     public ScaleStatusEnum Status { get; private set; }
     public ScaleTypeServiceEnum TypeService { get; private set;}
     public ScaleTurnEnum Turn { get; private set; }
     
     public DateTime FinishedAt { get; set; }
 
-    public void Cancel()
-    {
-        if (Status == ScaleStatusEnum.StandBy || Status == ScaleStatusEnum.InProgress ||
-            Status == ScaleStatusEnum.Started)
-        {
-            Status = ScaleStatusEnum.Cancelled;
-        }
-    }
+    //public void Cancel()
+    //{
+    //    if (Status == ScaleStatusEnum.StandBy || Status == ScaleStatusEnum.InProgress ||
+    //        Status == ScaleStatusEnum.Started)
+    //    {
+    //        Status = ScaleStatusEnum.Cancelled;
+    //    }
+    //}
 
-    public void Finish()
-    {
-        if (Status == ScaleStatusEnum.InProgress)
-        {
-            Status = ScaleStatusEnum.Finished;
-            FinishedAt = DateTime.Now;
-        }
-    }
+    //public void Finish()
+    //{
+    //    if (Status == ScaleStatusEnum.InProgress)
+    //    {
+    //        Status = ScaleStatusEnum.Finished;
+    //        FinishedAt = DateTime.Now;
+    //    }
+    //}
 
-    public void Update(List<User> offices, ScaleStatusEnum status, ScaleTypeServiceEnum typeServiceEnum, ScaleTurnEnum turn, DateTime startAt, DateTime finishAt)
-    {
-        OfficesNames = offices;
-        Status = status;
-        TypeService = typeServiceEnum;
-        Turn = turn;
-        StartAt = startAt;
-        FinishAt = finishAt;
-    }
+    //public void Update(ScaleStatusEnum status, ScaleTypeServiceEnum typeServiceEnum, ScaleTurnEnum turn, DateTime startAt, DateTime finishAt)
+    //{
+    //    Status = status;
+    //    TypeService = typeServiceEnum;
+    //    Turn = turn;
+    //    StartAt = startAt;
+    //    FinishAt = finishAt;
+    //}
 
-    public void Start()
-    {
-        if (Status == ScaleStatusEnum.StandBy)
-        {
-            Status = ScaleStatusEnum.Started;
-            StartAt = DateTime.Now;
-        }
-    }
+    //public void Start()
+    //{
+    //    if (Status == ScaleStatusEnum.StandBy)
+    //    {
+    //        Status = ScaleStatusEnum.Started;
+    //        StartAt = DateTime.Now;
+    //    }
+    //}
 }

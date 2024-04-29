@@ -15,7 +15,7 @@ public class GetByIdUsersQuery : IRequest<UserDetailsViewModel>
 
 public class UserDetailsViewModel
 {
-    public UserDetailsViewModel(int enrollment, string fullName, string email, DateTime birthDate, DateTime createdAt, bool active, List<UserScale?> scales)
+    public UserDetailsViewModel(int enrollment, string fullName, string email, DateTime birthDate, DateTime createdAt, bool active, Core.Entities.Scale? scales)
     {
         Enrollment = enrollment;
         FullName = fullName;
@@ -32,5 +32,5 @@ public class UserDetailsViewModel
     public DateTime BirthDate { get; private set; }
     public DateTime CreatedAt { get; private set; }
     public bool Active { get; private set; }
-    public List<UserScale?> Scales { get; private set; }
+    public Core.Entities.Scale? Scales { get; private set; }
 }
